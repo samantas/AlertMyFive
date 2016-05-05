@@ -2,10 +2,22 @@
 <html>
 
 <head>
-    <title>AlertMyFive</title>
-    <link rel="stylesheet" href="styles.css" />
-    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.js"></script>
-    <script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.7/jquery-ui.min.js"></script>
+  <style>
+    html, #map{
+      float:left;
+      width: 60%;
+    } 
+  </style>
+
+  <title>AlertMyFive</title>
+  <link rel="stylesheet" href="styles.css" />
+  <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.js"></script>
+  <script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.7/jquery-ui.min.js"></script>
+  <link rel="stylesheet" href = "https://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.7/leaflet.css">
+  <script src ="https://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.7/leaflet.js"></script>  
+  <!-- Jquery so that we can pull in external JSON files  -->
+  <script src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
+  <script type="text/javascript" src="data/services.js"></script>
 </head>
 
 <body>
@@ -43,8 +55,29 @@
                 <a id="UnLocal" href="http://www.unlocal.org/main-page/">UnLocal</a>
                 </p>
         </div>
-    </div>
+        <div class="section" id="map"></div>
+        <script>
 
+        // CartoDB Map
+        var layer = L.tileLayer('http://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}.png', {
+          attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, &copy; <a href="http://cartodb.com/attributions">CartoDB</a>'
+        });
+        var map = L.map('map').setView([40.7298200,-73.9943250], 9);
+        map.addLayer(layer);
+          
+        function onEachFeature(feature, layer) {
+            // does this feature have a property named popupContent?
+            if (feature.properties && feature.properties.Name) {
+                layer.bindPopup("<b>" + feature.properties.Name + "</b>" + "<br>" + feature.properties.Address + "<br>" + feature.properties.Phone + "<br>" + feature.properties.Email);
+            }
+        }
+
+        L.geoJson(resources, {
+            onEachFeature: onEachFeature
+        }).addTo(map);
+
+        </script>
+    </div>
 <script src="js/functionality.js"></script>
 </body>
 
