@@ -1,9 +1,9 @@
 /*styles sheet*/
 
 * {
-    font-family: 'Open-sans', arial, sans-serif;
+    font-family: 'Gotham', arial, sans-serif;
     font-size: 12px;
-    background: #e5f2ff;
+    background: #fff;
     color: #333;
 }
 
@@ -15,6 +15,10 @@ a {
 
 a:hover {
     opacity: 0.5;
+}
+
+h2 {
+    background: transparent;
 }
 
 .page {
@@ -31,6 +35,7 @@ a:hover {
     position: relative;
     display: block;
     padding: 10px 20px;
+    vertical-align: top;
 }
 
 .section-medium {
@@ -41,19 +46,22 @@ a:hover {
     padding: 10px 20px;
     margin: 0 auto;
     text-align: center;
+    vertical-align: top;
 }
 
 .section-medium>h1 {
     font-size: 28px;
-
 }
 
 .section-medium>h2 {
-    font-size: 24px;
+    font-size: 22px;
     font-style: italic;
     font-weight: 200;
     padding-bottom: 15px;
-    border-bottom: 1px solid rgba(0,0,0,0.2);
+}
+
+.section-medium>h3 {
+    font-size: 16px;
 }
 
 .section>.sub-section {
@@ -66,6 +74,7 @@ a:hover {
     padding: 20px;
     background: rgba(255, 255, 255, 0.5);
     border-radius: 5px;
+    vertical-align: top;
 }
 
 .section>.sub-section>h1.section-title,
@@ -81,11 +90,13 @@ a:hover {
 
 .navbar {
     width: 100%;
-    height: 100px;
+    height: 60px;
     margin: 0 auto;
     padding-top: 20px;
     position: relative;
     display: inline-block;
+    background: #e5f2ff;
+    border-bottom: 1px solid #e9e9e9;
 }
 
 .navbar>ul {
@@ -117,9 +128,43 @@ a:hover {
     font-weight: bold;
     display: inline-block;
     margin: 0;
-    padding: 15px 0px 0px 20px;
+    padding: 13px 0px 0px 20px;
 }
 
 .logo>h1 {
     background: transparent;
+}
+
+footer>.footer {
+    width: 100%;
+    bottom: 0;
+    position: fixed;
+}
+
+.footer-nav {
+    width: 100%;
+    height: auto;
+    margin: 0 auto;
+    padding: 10px 0px 10px 0px;
+    position: relative;
+    display: inline-block;
+    border-top: 1px solid #e9e9e9;
+}
+
+.footer-nav>ul {
+    background: transparent;
+    width: auto;
+    padding: 0;
+    display: inline-block;
+    position: relative;
+    float: left;
+}
+
+.footer-nav>ul>li {
+    background: transparent;
+    display: inline-block;
+    position: relative;
+    width: auto;
+    padding: 0px 15px;
+    text-align: center;
 }

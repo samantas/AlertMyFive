@@ -12,12 +12,28 @@ $people = array(
 
 // GENERATE UNIQUE ID FOR THE USER
 $uniqueIDmessage = "Your unique ID is: ";
+
+// THIS NEEDS TO BE A RANDOM NUMBER - ALL THE POSSIBILITIES THAT HAVE ALREADY BEEN TAKEN
 $uniqueID = rand(10001,99999);
 
 $body = $_REQUEST['Body'];
 
+// STORE UNIQUE ID
+// ASSOCIATE WITH EMERGENCY CONTACTS
+
+// SHOULD THE UNIQUE ID BE ASSOCIATED WITH THE PERSON'S ACTUAL PHONE NUMBER?
+
+// IF USER TEXTS US THEIR CUSTOM MESSAGE TO SIGNIFY DISTRESS FROM THEIR OG PHONE NUMBER THEN WE SEND ALERT AFTER 10 MINS
+// WE SHOULD ALLOW THEM TO CHOOSE THIS CUSTOM MESSAGE SO THEY DON'T HAVE TO REMEMBER A CODE IN A STRESSFUL SITUATION
+// IF THE UNIQUE ID IS TEXTED FROM A NEW PHONE NUMBER, WE SHOULD ALTERT
+// THE EMERGENCY CONTACTS THAT THE ALERT WAS SENT FROM AN UNFAMILIAR PHONE NUMBER
+
+// IF UNIQUE ID IS TEXTED TO US WITH A -EDIT AFTER IT, GIVE OPTION TO CHANGE CONTACTS
+// IF UNIQUE ID IS TEXTED TO US WITH A -DELETE AFTER IT, REMOVE THE UNIQUE ID AND ITS EMERGENCY CONTACTS
+// IF A UNIQUE ID IS TECTED TO US WITH A -NEW, GIVE OPTION TO CHANGE ...
+
 //
-// NEED LOGIC TO AVOID SENDING WELCOME MESSAGE TO USERS ITS ALREADY SENT IT TO
+// IF A MESSAGE HAS BEEN SENT ONCE, DON'T SEND IT AGAIN BY MISTAKE
 //
 
 // Loop over list of $people array and send message to each one of them
@@ -42,15 +58,13 @@ if ($body == "1") {
 }
 // PART TWO
 else if ($body == "2") {
-	$response = ", " . $uniqueIDmessage . $uniqueID . "." . "You will use this to alert your emergency contacts. Send us 3-5 phone numbers to serve as your emergency contacts, separate with a comma.";
+	$response = ", " . $uniqueIDmessage . $uniqueID . "." . " You will use this to alert your emergency contacts. Send us 3-5 phone numbers to serve as your emergency contacts, separate with a comma.";
 } 
 
 // CODE TO BE EXECUTED IF OTHER ELSE IF STATEMENTS ARE FALSE
 else {
-	$response = ", as sign up process has not been initated.";
+	$response = ", this is not a valid cmomand.";
 }
-
-
 
 
 header("content-type: text/xml");
