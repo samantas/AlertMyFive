@@ -1,0 +1,66 @@
+Sam Set Up Stages / Notes / Problems
+///
+$ ssh -i <drop .pem key here>
+
+$ chmod 400 <.pem key here>
+
+$ ssh -i <drop .pem key here> ubuntu@(IP address)
+
+Welcome to Ubuntu 14.04.3 LTS (GNU/Linux 3.13.0-74-generic x86_64)
+
+ * Documentation:  https://help.ubuntu.com/
+ <welcome message>
+
+$ sudo apt-get update
+
+$ sudo apt-get upgrade
+
+<You will be prompted to continue, say yes>
+
+///
+
+$ sudo apt-get install lamp-server^
+
+$ sudo /etc/init.d/apache2 restart
+ * Restarting web server apache2                                           [ OK ] 
+
+
+$ sudo a2enmod php5
+Module php5 already enabled
+
+$ sudo service apache2 restart
+ * Restarting web server apache2                                           [ OK ] 
+
+$ sudo apt-get install php5
+
+
+$ sudo apt-get install libapache2-mod-php5
+
+
+$ sudo adduser ubuntu www-data
+
+
+$ sudo a2ensite <name of file>.conf
+
+
+
+# last steps were assisted by https://www.digitalocean.com/community/tutorials/how-to-set-up-apache-virtual-hosts-on-ubuntu-14-04-lts
+#
+#
+#
+# getting 500 internal error
+#
+#
+# 
+# I was missing curl to make the HTTP requests
+# sudo apt-get update
+# sudo apt-get install php5-curl
+# sudo service apache2 restart
+# solved my problem of running php file via IP address
+#
+#
+# still getting errors from Twilio when I text back ‘1’ which is supposed to return a
+# message
+# 
+# solved because my Twilio account wasn’t directing the requests to the IP (the URL wasn’t
+# related to the IP for some reason)
