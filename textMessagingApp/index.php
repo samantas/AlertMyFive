@@ -57,26 +57,33 @@ if(!$name = $people[$_REQUEST['From']]) {
 if ($body == "1") {
     $response = ", to proceed with sign up, reply with '2'. For language options, reply with '0'";
     $counter++;
+
 } else if ($body == "0") {
 	$response = ", for Spanish, reply with 's'";
 
-} else if ($body == 's') {
+} else if ($body == 's' || $body == 'S') {
     // NEED SPANISH CONTENT
-    $response = ", ";
+    $response = ", we apologize for the inconvenience. We have not yet set up our Spanish language sign up. Reply with '2' to proceed with sign up in English.";
 
 } else if ($body == "2") {
     $response = ", " . $uniqueIDmessage . $uniqueID . "." . " You will use this to alert your emergency contacts. Reply with 3-5 phone numbers to serve as your emergency contacts, separate with a comma.";
     $counter++;
-} 
-else if (is_numeric($body) && is_numeric($body) >= 20) {
+
+} else if (preg_match("/^\d+(?:,\d+)*$/", $body)) {
 	$response = ", your emergency contacts have been saved. Would you like to customize the alert message?";
 	$counter++;
+
 } else if ($body == "Yes" || $body == "yes") {
-	$response = ", please reply with your custom message.";
+	$response = ", please reply with your custom message. If you choose to use numbers, please use less than 20. Your custom message cannot be 'yes'.";
 	$counter++;	
-} else if (ctype_alpha($body) && ctype_alpha($body) || is_numeric($body) && is_numeric($body) < 20) {
-	$response = ", thank you for signing up! We hope to help keep you safe. To delete your account, text us your unique ID followed by -DELETE.";
+
+} else if ($body == "No" || $body == "no") {
+	$response = ", thank you for signing up! We hope to help keep you safe. Your emergency contacts will be alerted with our generic message, which you can find on our website. If you want to change the message, reply with your unique ID followed by -EDITM. To delete your account, reply with your unique ID followed by -DELETE.";
+
+} else if (preg_match('/[^0-9a-z\s-]/i', $body) || preg_match('/^[a-zA-Z\s]+$/', $body) && $body != "yes" && $body != "Yes" && is_numeric($body) < 20) {
+    $response = ", thank you for signing up! We hope to help keep you safe. If you want to change the message, reply with your unique ID followed by -EDITM. To delete your account, text us your unique ID followed by -DELETE.";
 }
+
 
 // CODE TO BE EXECUTED IF OTHER ELSE IF STATEMENTS ARE FALSE
 else { 
