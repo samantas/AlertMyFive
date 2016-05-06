@@ -42,26 +42,26 @@ h2 {
 .section-medium {
     height: auto;
     width: 80%;
-    position: absolute;
+    position: relative;
     display: block;
     padding: 10px 20px;
     margin: 0 auto;
-    text-align: center;
+    text-align: left;
     vertical-align: top;
 }
 
 .section-medium>h1 {
     font-size: 28px;
-    position:absolute;
-    margin:auto;
-    left:400px;
-    top:0px;
+    position: absolute;
+    margin: auto;
+    left: 400px;
+    top: 0px;
 }
 
 #title {
-    position:absolute;
-    left:0px;
-    top:0px;
+    position: absolute;
+    left: 0px;
+    top: 0px;
 }
 
 img#title {
@@ -71,30 +71,39 @@ img#title {
 }
 
 #logo {
-    position:absolute;
-    left:150px;
+    position: relative;
+    left: 0;
 }
 
 #text {
-    position:absolute;
-    top:-20px;
+    position: absolute;
+    top: -20px;
 }
 
 .section-medium>h2 {
-    font-size: 22px;
-    font-style: italic;
+    font-size: 20px;
+    font-style: normal;
     font-weight: 200;
-    padding-bottom: 15px;
-    position:absolute;
-    top:50px;
-    left:650px;
-    background:#dfdfdf;
+    padding: 20px;
+    position: relative;
+    border-radius: 5px;
+    display: inline-block;
+    float: right;
+    width: 50%;
+    text-align: left;
+    margin: 50px 0px 0px 0px;
 }
 
 .section-medium>h3 {
-    font-size: 16px;
-    position:absolute;
-    left:650px;
+    color: #333;
+    font-size: 20px;
+    text-transform: none;
+    font-weight: 500;
+    position: relative;
+    display: inline-block;
+    width: 100%;
+    height: 50px;
+    text-align: center;
 }
 
 .section>.sub-section {
@@ -154,7 +163,7 @@ img#title {
     text-decoration: underline;
 }
 
-#map{
+#map {
     height: 300px;
     width: 300px;
     display: inline-block;
@@ -181,7 +190,7 @@ footer>.footer {
     width: 100%;
     bottom: 0;
     position: fixed;
-    left:0;
+    left: 0;
 }
 
 .footer-nav {
