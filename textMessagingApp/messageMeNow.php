@@ -12,11 +12,33 @@ $people = array(
 
 // GENERATE UNIQUE ID FOR THE USER
 $uniqueIDmessage = "Your unique ID is: ";
-
 // THIS NEEDS TO BE A RANDOM NUMBER - ALL THE POSSIBILITIES THAT HAVE ALREADY BEEN TAKEN
-$uniqueID = rand(10001,99999);
+$uniqueID = get_number();
 
 $body = $_REQUEST['Body'];
+
+
+session_start();
+if (!isset($_SESSION['numbers'])) {
+    $_SESSION['numbers']="*"; //---create the session variable
+}
+
+function get_number() {
+    $i = 0;
+    do { 
+        $num=rand(10000,99999); //---generate a random number
+        if (!strstr($_SESSION['numbers'],"*".$num."*")) { //---check if the number has already been used
+            $_SESSION['numbers']=$_SESSION['numbers'] . $i . "*"; //---add the number to the session variable to avoid repeating
+            if (substr_count($_SESSION['numbers'],"*")>=10000) { //---resets the session variable when all 20 number have been used
+                    $_SESSION['numbers']="*";
+            }
+            $i=$num; //---ends the while loop to return the value
+        }  
+    } 
+        while ($i==0);
+        return $i;
+}
+
 
 // STORE UNIQUE ID
 // ASSOCIATE WITH EMERGENCY CONTACTS
@@ -38,7 +60,7 @@ $body = $_REQUEST['Body'];
 
 // Loop over list of $people array and send message to each one of them
 // foreach ($people as $number => $name) {
-// 	$sms = $client->account->messages->sendMessage("954-998-0841", $number, "Hey $name, reply with '1' to sign up.");
+//  $sms = $client->account->messages->sendMessage("954-998-0841", $number, "Hey $name, reply with '1' to sign up.");
 //     }
 
 // Loop over the list of messages and echo a property for each one
@@ -49,21 +71,21 @@ $body = $_REQUEST['Body'];
 
 // RECOGNIZE USER
 if(!$name = $people[$_REQUEST['From']]) {
-	$name = "Unknown";
+    $name = "Unknown";
     }
 
 // PART ONE
 if ($body == "1") {
-	$response = ", to proceed with sign up, reply with '2'.";
+    $response = ", to proceed with sign up, reply with '2'.";
 }
 // PART TWO
 else if ($body == "2") {
-	$response = ", " . $uniqueIDmessage . $uniqueID . "." . " You will use this to alert your emergency contacts. Send us 3-5 phone numbers to serve as your emergency contacts, separate with a comma.";
+    $response = ", " . $uniqueIDmessage . $uniqueID . "." . " You will use this to alert your emergency contacts. Send us 3-5 phone numbers to serve as your emergency contacts, separate with a comma.";
 } 
 
 // CODE TO BE EXECUTED IF OTHER ELSE IF STATEMENTS ARE FALSE
 else {
-	$response = ", this is not a valid cmomand.";
+    $response = ", this is not a valid command. ";
 }
 
 
@@ -73,6 +95,5 @@ echo "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n";
 ?>
 
 <Response>
-  <Message><?php echo $name, $response ?></Message>
+  <Message><?php echo $name, $response, $uniqueID ?></Message>
 </Response>
-
