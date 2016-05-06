@@ -70,7 +70,7 @@ if ($body == "1") {
     $counter++;
 
 } else if (preg_match("/^\d+(?:,\d+)*$/", $body)) {
-	$response = ", your emergency contacts have been saved. Would you like to customize the alert message?";
+	$response = ", your emergency contacts have been saved. Would you like to customize the alert message? (Yes/No)";
 	$counter++;
 
 } else if ($body == "Yes" || $body == "yes") {
@@ -83,7 +83,6 @@ if ($body == "1") {
 } else if (preg_match('/[^0-9a-z\s-]/i', $body) || preg_match('/^[a-zA-Z\s]+$/', $body) && $body != "yes" && $body != "Yes" && is_numeric($body) < 20) {
     $response = ", thank you for signing up! We hope to help keep you safe. If you want to change the message, reply with your unique ID followed by -EDITM. To delete your account, text us your unique ID followed by -DELETE.";
 }
-
 
 // CODE TO BE EXECUTED IF OTHER ELSE IF STATEMENTS ARE FALSE
 else { 
